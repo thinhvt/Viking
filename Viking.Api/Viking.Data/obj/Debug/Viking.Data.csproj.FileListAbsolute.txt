@@ -1,0 +1,17 @@
+C:\Users\Regera\Documents\API_Viking\Viking.Api\Viking.Data\bin\Debug\Viking.Data.dll.config
+C:\Users\Regera\Documents\API_Viking\Viking.Api\Viking.Data\bin\Debug\Viking.Data.dll
+C:\Users\Regera\Documents\API_Viking\Viking.Api\Viking.Data\bin\Debug\Viking.Data.pdb
+C:\Users\Regera\Documents\API_Viking\Viking.Api\Viking.Data\bin\Debug\Autofac.dll
+C:\Users\Regera\Documents\API_Viking\Viking.Api\Viking.Data\bin\Debug\Autofac.Integration.Mvc.dll
+C:\Users\Regera\Documents\API_Viking\Viking.Api\Viking.Data\bin\Debug\AutoMapper.dll
+C:\Users\Regera\Documents\API_Viking\Viking.Api\Viking.Data\bin\Debug\EntityFramework.dll
+C:\Users\Regera\Documents\API_Viking\Viking.Api\Viking.Data\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Regera\Documents\API_Viking\Viking.Api\Viking.Data\bin\Debug\SkyWeb.DatVM.Data.dll
+C:\Users\Regera\Documents\API_Viking\Viking.Api\Viking.Data\bin\Debug\SkyWeb.DatVM.Mvc.dll
+C:\Users\Regera\Documents\API_Viking\Viking.Api\Viking.Data\bin\Debug\Autofac.xml
+C:\Users\Regera\Documents\API_Viking\Viking.Api\Viking.Data\bin\Debug\AutoMapper.xml
+C:\Users\Regera\Documents\API_Viking\Viking.Api\Viking.Data\bin\Debug\EntityFramework.xml
+C:\Users\Regera\Documents\API_Viking\Viking.Api\Viking.Data\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Regera\Documents\API_Viking\Viking.Api\Viking.Data\obj\Debug\Viking.Data.csprojResolveAssemblyReference.cache
+C:\Users\Regera\Documents\API_Viking\Viking.Api\Viking.Data\obj\Debug\Viking.Data.dll
+C:\Users\Regera\Documents\API_Viking\Viking.Api\Viking.Data\obj\Debug\Viking.Data.pdb

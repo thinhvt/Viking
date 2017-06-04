@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="vikingModelStoreContainer" CdmEntityContainer="vikingEntities">
+    <EntitySetMapping Name="tbl_Account">
+      <EntityTypeMapping TypeName="vikingModel.tbl_Account">
+        <MappingFragment StoreEntitySet="tbl_Account">
+          <ScalarProperty Name="accountId" ColumnName="accountId" />
+          <ScalarProperty Name="teamID" ColumnName="teamID" />
+          <ScalarProperty Name="accountPass" ColumnName="accountPass" />
+          <ScalarProperty Name="accountName" ColumnName="accountName" />
+          <ScalarProperty Name="aPhone" ColumnName="aPhone" />
+          <ScalarProperty Name="aFBurl" ColumnName="aFBurl" />
+          <ScalarProperty Name="aAddress" ColumnName="aAddress" />
+          <ScalarProperty Name="aCMND" ColumnName="aCMND" />
+          <ScalarProperty Name="aRoleId" ColumnName="aRoleId" />
+          <ScalarProperty Name="aEmail" ColumnName="aEmail" />
+          <ScalarProperty Name="aIsMale" ColumnName="aIsMale" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_Campain">
+      <EntityTypeMapping TypeName="vikingModel.tbl_Campain">
+        <MappingFragment StoreEntitySet="tbl_Campain">
+          <ScalarProperty Name="campainId" ColumnName="campainId" />
+          <ScalarProperty Name="campainCode" ColumnName="campainCode" />
+          <ScalarProperty Name="campDes" ColumnName="campDes" />
+          <ScalarProperty Name="dateStart" ColumnName="dateStart" />
+          <ScalarProperty Name="dateEnd" ColumnName="dateEnd" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_Contact">
+      <EntityTypeMapping TypeName="vikingModel.tbl_Contact">
+        <MappingFragment StoreEntitySet="tbl_Contact">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="dateStart" ColumnName="dateStart" />
+          <ScalarProperty Name="dateEnd" ColumnName="dateEnd" />
+          <ScalarProperty Name="lastUpdate" ColumnName="lastUpdate" />
+          <ScalarProperty Name="note" ColumnName="note" />
+          <ScalarProperty Name="cusID" ColumnName="cusID" />
+          <ScalarProperty Name="curAdminId" ColumnName="curAdminId" />
+          <ScalarProperty Name="teamID" ColumnName="teamID" />
+          <ScalarProperty Name="proID" ColumnName="proID" />
+          <ScalarProperty Name="loanAmounth" ColumnName="loanAmounth" />
+          <ScalarProperty Name="stageID" ColumnName="stageID" />
+          <ScalarProperty Name="history" ColumnName="history" />
+          <ScalarProperty Name="referenceSource" ColumnName="referenceSource" />
+          <ScalarProperty Name="campainID" ColumnName="campainID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_Customer">
+      <EntityTypeMapping TypeName="vikingModel.tbl_Customer">
+        <MappingFragment StoreEntitySet="tbl_Customer">
+          <ScalarProperty Name="CusId" ColumnName="CusId" />
+          <ScalarProperty Name="CusCMND" ColumnName="CusCMND" />
+          <ScalarProperty Name="CusName" ColumnName="CusName" />
+          <ScalarProperty Name="CusPhone" ColumnName="CusPhone" />
+          <ScalarProperty Name="CusAddress" ColumnName="CusAddress" />
+          <ScalarProperty Name="CusCompany" ColumnName="CusCompany" />
+          <ScalarProperty Name="CusPosition" ColumnName="CusPosition" />
+          <ScalarProperty Name="CusSalary" ColumnName="CusSalary" />
+          <ScalarProperty Name="CusNote" ColumnName="CusNote" />
+          <ScalarProperty Name="CusEmail" ColumnName="CusEmail" />
+          <ScalarProperty Name="CusSexIsMale" ColumnName="CusSexIsMale" />
+          <ScalarProperty Name="CusDateOfBirth" ColumnName="CusDateOfBirth" />
+          <ScalarProperty Name="CusCICNumber" ColumnName="CusCICNumber" />
+          <ScalarProperty Name="CusLimitOffer" ColumnName="CusLimitOffer" />
+          <ScalarProperty Name="CusDistrict" ColumnName="CusDistrict" />
+          <ScalarProperty Name="CusCity" ColumnName="CusCity" />
+          <ScalarProperty Name="CusLeadProDuct" ColumnName="CusLeadProDuct" />
+          <ScalarProperty Name="CusVPID" ColumnName="CusVPID" />
+          <ScalarProperty Name="Branches" ColumnName="Branches" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_KPI">
+      <EntityTypeMapping TypeName="vikingModel.tbl_KPI">
+        <MappingFragment StoreEntitySet="tbl_KPI">
+          <ScalarProperty Name="kpiID" ColumnName="kpiID" />
+          <ScalarProperty Name="roleID" ColumnName="roleID" />
+          <ScalarProperty Name="kpiNumber" ColumnName="kpiNumber" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_Product">
+      <EntityTypeMapping TypeName="vikingModel.tbl_Product">
+        <MappingFragment StoreEntitySet="tbl_Product">
+          <ScalarProperty Name="productID" ColumnName="productID" />
+          <ScalarProperty Name="proDescription" ColumnName="proDescription" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_Role">
+      <EntityTypeMapping TypeName="vikingModel.tbl_Role">
+        <MappingFragment StoreEntitySet="tbl_Role">
+          <ScalarProperty Name="roleid" ColumnName="roleid" />
+          <ScalarProperty Name="roleDescription" ColumnName="roleDescription" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_Stage">
+      <EntityTypeMapping TypeName="vikingModel.tbl_Stage">
+        <MappingFragment StoreEntitySet="tbl_Stage">
+          <ScalarProperty Name="stageId" ColumnName="stageId" />
+          <ScalarProperty Name="stageDescription" ColumnName="stageDescription" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_Team">
+      <EntityTypeMapping TypeName="vikingModel.tbl_Team">
+        <MappingFragment StoreEntitySet="tbl_Team">
+          <ScalarProperty Name="teamId" ColumnName="teamId" />
+          <ScalarProperty Name="teamDescription" ColumnName="teamDescription" />
+          <ScalarProperty Name="leaderId" ColumnName="leaderId" />
+          <ScalarProperty Name="teamCampain" ColumnName="teamCampain" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

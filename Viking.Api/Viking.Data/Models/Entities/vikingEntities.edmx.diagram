@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a22072fe2ea241ccb7cca83df7464d0c" Name="Diagram1">
+        <EntityTypeShape EntityType="vikingModel.tbl_Account" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="vikingModel.tbl_Campain" Width="1.5" PointX="3.75" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="vikingModel.tbl_Contact" Width="1.5" PointX="6" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="vikingModel.tbl_Customer" Width="1.5" PointX="3.75" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="vikingModel.tbl_KPI" Width="1.5" PointX="11" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="vikingModel.tbl_Product" Width="1.5" PointX="3.75" PointY="17.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="vikingModel.tbl_Role" Width="1.5" PointX="8.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="vikingModel.tbl_Stage" Width="1.5" PointX="3.75" PointY="19.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="vikingModel.tbl_Team" Width="1.5" PointX="0.75" PointY="4.5" IsExpanded="true" />
+        <AssociationConnector Association="vikingModel.FK_tbl_Account_tbl_Team" ManuallyRouted="false" />
+        <AssociationConnector Association="vikingModel.FK_tbl_Contact_tbl_Campain" ManuallyRouted="false" />
+        <AssociationConnector Association="vikingModel.FK_tbl_Contact_tbl_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="vikingModel.FK_tbl_Contact_tbl_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="vikingModel.FK_tbl_Contact_tbl_Stage" ManuallyRouted="false" />
+        <AssociationConnector Association="vikingModel.FK_tbl_Contact_tbl_Team" ManuallyRouted="false" />
+        <AssociationConnector Association="vikingModel.FK_tbl_KPI_tbl_Role" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

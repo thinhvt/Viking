@@ -1,0 +1,632 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="vikingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tbl_Account">
+          <Key>
+            <PropertyRef Name="accountId" />
+          </Key>
+          <Property Name="accountId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="teamID" Type="varchar" MaxLength="50" />
+          <Property Name="accountPass" Type="varchar" MaxLength="50" />
+          <Property Name="accountName" Type="nvarchar" MaxLength="100" />
+          <Property Name="aPhone" Type="nvarchar" MaxLength="50" />
+          <Property Name="aFBurl" Type="nvarchar" MaxLength="250" />
+          <Property Name="aAddress" Type="nvarchar" MaxLength="350" />
+          <Property Name="aCMND" Type="varchar" MaxLength="50" />
+          <Property Name="aRoleId" Type="int" />
+          <Property Name="aEmail" Type="nvarchar" MaxLength="250" />
+          <Property Name="aIsMale" Type="bit" />
+        </EntityType>
+        <EntityType Name="tbl_Campain">
+          <Key>
+            <PropertyRef Name="campainId" />
+          </Key>
+          <Property Name="campainId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="campainCode" Type="varchar" MaxLength="50" />
+          <Property Name="campDes" Type="nvarchar" MaxLength="550" />
+          <Property Name="dateStart" Type="date" />
+          <Property Name="dateEnd" Type="date" />
+        </EntityType>
+        <EntityType Name="tbl_Contact">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="dateStart" Type="date" />
+          <Property Name="dateEnd" Type="date" />
+          <Property Name="lastUpdate" Type="date" />
+          <Property Name="note" Type="nvarchar" MaxLength="350" />
+          <Property Name="cusID" Type="int" />
+          <Property Name="curAdminId" Type="varchar" MaxLength="50" />
+          <Property Name="teamID" Type="varchar" MaxLength="50" />
+          <Property Name="proID" Type="int" />
+          <Property Name="loanAmounth" Type="float" />
+          <Property Name="stageID" Type="int" />
+          <Property Name="history" Type="nvarchar" MaxLength="1550" />
+          <Property Name="referenceSource" Type="nvarchar" MaxLength="250" />
+          <Property Name="campainID" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_Customer">
+          <Key>
+            <PropertyRef Name="CusId" />
+          </Key>
+          <Property Name="CusId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CusCMND" Type="varchar" MaxLength="50" />
+          <Property Name="CusName" Type="nvarchar" MaxLength="250" />
+          <Property Name="CusPhone" Type="nvarchar" MaxLength="50" />
+          <Property Name="CusAddress" Type="nvarchar" MaxLength="250" />
+          <Property Name="CusCompany" Type="nvarchar" MaxLength="250" />
+          <Property Name="CusPosition" Type="nvarchar" MaxLength="100" />
+          <Property Name="CusSalary" Type="float" />
+          <Property Name="CusNote" Type="nvarchar" MaxLength="550" />
+          <Property Name="CusEmail" Type="varchar" MaxLength="150" />
+          <Property Name="CusSexIsMale" Type="bit" />
+          <Property Name="CusDateOfBirth" Type="date" />
+          <Property Name="CusCICNumber" Type="varchar" MaxLength="50" />
+          <Property Name="CusLimitOffer" Type="float" />
+          <Property Name="CusDistrict" Type="nvarchar" MaxLength="150" />
+          <Property Name="CusCity" Type="nvarchar" MaxLength="50" />
+          <Property Name="CusLeadProDuct" Type="nvarchar" MaxLength="250" />
+          <Property Name="CusVPID" Type="varchar" MaxLength="50" />
+          <Property Name="Branches" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="tbl_KPI">
+          <Key>
+            <PropertyRef Name="kpiID" />
+          </Key>
+          <Property Name="kpiID" Type="int" Nullable="false" />
+          <Property Name="roleID" Type="int" />
+          <Property Name="kpiNumber" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_Product">
+          <Key>
+            <PropertyRef Name="productID" />
+          </Key>
+          <Property Name="productID" Type="int" Nullable="false" />
+          <Property Name="proDescription" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbl_Role">
+          <Key>
+            <PropertyRef Name="roleid" />
+          </Key>
+          <Property Name="roleid" Type="int" Nullable="false" />
+          <Property Name="roleDescription" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbl_Stage">
+          <Key>
+            <PropertyRef Name="stageId" />
+          </Key>
+          <Property Name="stageId" Type="int" Nullable="false" />
+          <Property Name="stageDescription" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="tbl_Team">
+          <Key>
+            <PropertyRef Name="teamId" />
+          </Key>
+          <Property Name="teamId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="teamDescription" Type="nvarchar" MaxLength="250" />
+          <Property Name="leaderId" Type="varchar" MaxLength="50" />
+          <Property Name="teamCampain" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <Association Name="FK_tbl_Account_tbl_Team">
+          <End Role="tbl_Team" Type="Self.tbl_Team" Multiplicity="0..1" />
+          <End Role="tbl_Account" Type="Self.tbl_Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Team">
+              <PropertyRef Name="teamId" />
+            </Principal>
+            <Dependent Role="tbl_Account">
+              <PropertyRef Name="teamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Contact_tbl_Campain">
+          <End Role="tbl_Campain" Type="Self.tbl_Campain" Multiplicity="0..1" />
+          <End Role="tbl_Contact" Type="Self.tbl_Contact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Campain">
+              <PropertyRef Name="campainId" />
+            </Principal>
+            <Dependent Role="tbl_Contact">
+              <PropertyRef Name="campainID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Contact_tbl_Customer">
+          <End Role="tbl_Customer" Type="Self.tbl_Customer" Multiplicity="0..1" />
+          <End Role="tbl_Contact" Type="Self.tbl_Contact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Customer">
+              <PropertyRef Name="CusId" />
+            </Principal>
+            <Dependent Role="tbl_Contact">
+              <PropertyRef Name="cusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Contact_tbl_Product">
+          <End Role="tbl_Product" Type="Self.tbl_Product" Multiplicity="0..1" />
+          <End Role="tbl_Contact" Type="Self.tbl_Contact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Product">
+              <PropertyRef Name="productID" />
+            </Principal>
+            <Dependent Role="tbl_Contact">
+              <PropertyRef Name="proID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Contact_tbl_Stage">
+          <End Role="tbl_Stage" Type="Self.tbl_Stage" Multiplicity="0..1" />
+          <End Role="tbl_Contact" Type="Self.tbl_Contact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Stage">
+              <PropertyRef Name="stageId" />
+            </Principal>
+            <Dependent Role="tbl_Contact">
+              <PropertyRef Name="stageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Contact_tbl_Team">
+          <End Role="tbl_Team" Type="Self.tbl_Team" Multiplicity="0..1" />
+          <End Role="tbl_Contact" Type="Self.tbl_Contact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Team">
+              <PropertyRef Name="teamId" />
+            </Principal>
+            <Dependent Role="tbl_Contact">
+              <PropertyRef Name="teamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_KPI_tbl_Role">
+          <End Role="tbl_Role" Type="Self.tbl_Role" Multiplicity="0..1" />
+          <End Role="tbl_KPI" Type="Self.tbl_KPI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Role">
+              <PropertyRef Name="roleid" />
+            </Principal>
+            <Dependent Role="tbl_KPI">
+              <PropertyRef Name="roleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="vikingModelStoreContainer">
+          <EntitySet Name="tbl_Account" EntityType="Self.tbl_Account" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Campain" EntityType="Self.tbl_Campain" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Contact" EntityType="Self.tbl_Contact" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Customer" EntityType="Self.tbl_Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_KPI" EntityType="Self.tbl_KPI" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Product" EntityType="Self.tbl_Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Role" EntityType="Self.tbl_Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Stage" EntityType="Self.tbl_Stage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Team" EntityType="Self.tbl_Team" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tbl_Account_tbl_Team" Association="Self.FK_tbl_Account_tbl_Team">
+            <End Role="tbl_Team" EntitySet="tbl_Team" />
+            <End Role="tbl_Account" EntitySet="tbl_Account" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Contact_tbl_Campain" Association="Self.FK_tbl_Contact_tbl_Campain">
+            <End Role="tbl_Campain" EntitySet="tbl_Campain" />
+            <End Role="tbl_Contact" EntitySet="tbl_Contact" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Contact_tbl_Customer" Association="Self.FK_tbl_Contact_tbl_Customer">
+            <End Role="tbl_Customer" EntitySet="tbl_Customer" />
+            <End Role="tbl_Contact" EntitySet="tbl_Contact" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Contact_tbl_Product" Association="Self.FK_tbl_Contact_tbl_Product">
+            <End Role="tbl_Product" EntitySet="tbl_Product" />
+            <End Role="tbl_Contact" EntitySet="tbl_Contact" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Contact_tbl_Stage" Association="Self.FK_tbl_Contact_tbl_Stage">
+            <End Role="tbl_Stage" EntitySet="tbl_Stage" />
+            <End Role="tbl_Contact" EntitySet="tbl_Contact" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Contact_tbl_Team" Association="Self.FK_tbl_Contact_tbl_Team">
+            <End Role="tbl_Team" EntitySet="tbl_Team" />
+            <End Role="tbl_Contact" EntitySet="tbl_Contact" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_KPI_tbl_Role" Association="Self.FK_tbl_KPI_tbl_Role">
+            <End Role="tbl_Role" EntitySet="tbl_Role" />
+            <End Role="tbl_KPI" EntitySet="tbl_KPI" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="vikingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tbl_Account">
+          <Key>
+            <PropertyRef Name="accountId" />
+          </Key>
+          <Property Name="accountId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="teamID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="accountPass" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="accountName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="aPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="aFBurl" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="aAddress" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
+          <Property Name="aCMND" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="aRoleId" Type="Int32" />
+          <Property Name="aEmail" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="aIsMale" Type="Boolean" />
+          <NavigationProperty Name="tbl_Team" Relationship="Self.FK_tbl_Account_tbl_Team" FromRole="tbl_Account" ToRole="tbl_Team" />
+        </EntityType>
+        <EntityType Name="tbl_Campain">
+          <Key>
+            <PropertyRef Name="campainId" />
+          </Key>
+          <Property Name="campainId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="campainCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="campDes" Type="String" MaxLength="550" FixedLength="false" Unicode="true" />
+          <Property Name="dateStart" Type="DateTime" Precision="0" />
+          <Property Name="dateEnd" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="tbl_Contact" Relationship="Self.FK_tbl_Contact_tbl_Campain" FromRole="tbl_Campain" ToRole="tbl_Contact" />
+        </EntityType>
+        <EntityType Name="tbl_Contact">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="dateStart" Type="DateTime" Precision="0" />
+          <Property Name="dateEnd" Type="DateTime" Precision="0" />
+          <Property Name="lastUpdate" Type="DateTime" Precision="0" />
+          <Property Name="note" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
+          <Property Name="cusID" Type="Int32" />
+          <Property Name="curAdminId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="teamID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="proID" Type="Int32" />
+          <Property Name="loanAmounth" Type="Double" />
+          <Property Name="stageID" Type="Int32" />
+          <Property Name="history" Type="String" MaxLength="1550" FixedLength="false" Unicode="true" />
+          <Property Name="referenceSource" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="campainID" Type="Int32" />
+          <NavigationProperty Name="tbl_Campain" Relationship="Self.FK_tbl_Contact_tbl_Campain" FromRole="tbl_Contact" ToRole="tbl_Campain" />
+          <NavigationProperty Name="tbl_Customer" Relationship="Self.FK_tbl_Contact_tbl_Customer" FromRole="tbl_Contact" ToRole="tbl_Customer" />
+          <NavigationProperty Name="tbl_Product" Relationship="Self.FK_tbl_Contact_tbl_Product" FromRole="tbl_Contact" ToRole="tbl_Product" />
+          <NavigationProperty Name="tbl_Stage" Relationship="Self.FK_tbl_Contact_tbl_Stage" FromRole="tbl_Contact" ToRole="tbl_Stage" />
+          <NavigationProperty Name="tbl_Team" Relationship="Self.FK_tbl_Contact_tbl_Team" FromRole="tbl_Contact" ToRole="tbl_Team" />
+        </EntityType>
+        <EntityType Name="tbl_Customer">
+          <Key>
+            <PropertyRef Name="CusId" />
+          </Key>
+          <Property Name="CusId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CusCMND" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CusName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="CusPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CusAddress" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="CusCompany" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="CusPosition" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CusSalary" Type="Double" />
+          <Property Name="CusNote" Type="String" MaxLength="550" FixedLength="false" Unicode="true" />
+          <Property Name="CusEmail" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="CusSexIsMale" Type="Boolean" />
+          <Property Name="CusDateOfBirth" Type="DateTime" Precision="0" />
+          <Property Name="CusCICNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CusLimitOffer" Type="Double" />
+          <Property Name="CusDistrict" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="CusCity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CusLeadProDuct" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="CusVPID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Branches" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tbl_Contact" Relationship="Self.FK_tbl_Contact_tbl_Customer" FromRole="tbl_Customer" ToRole="tbl_Contact" />
+        </EntityType>
+        <EntityType Name="tbl_KPI">
+          <Key>
+            <PropertyRef Name="kpiID" />
+          </Key>
+          <Property Name="kpiID" Type="Int32" Nullable="false" />
+          <Property Name="roleID" Type="Int32" />
+          <Property Name="kpiNumber" Type="Int32" />
+          <NavigationProperty Name="tbl_Role" Relationship="Self.FK_tbl_KPI_tbl_Role" FromRole="tbl_KPI" ToRole="tbl_Role" />
+        </EntityType>
+        <EntityType Name="tbl_Product">
+          <Key>
+            <PropertyRef Name="productID" />
+          </Key>
+          <Property Name="productID" Type="Int32" Nullable="false" />
+          <Property Name="proDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tbl_Contact" Relationship="Self.FK_tbl_Contact_tbl_Product" FromRole="tbl_Product" ToRole="tbl_Contact" />
+        </EntityType>
+        <EntityType Name="tbl_Role">
+          <Key>
+            <PropertyRef Name="roleid" />
+          </Key>
+          <Property Name="roleid" Type="Int32" Nullable="false" />
+          <Property Name="roleDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tbl_KPI" Relationship="Self.FK_tbl_KPI_tbl_Role" FromRole="tbl_Role" ToRole="tbl_KPI" />
+        </EntityType>
+        <EntityType Name="tbl_Stage">
+          <Key>
+            <PropertyRef Name="stageId" />
+          </Key>
+          <Property Name="stageId" Type="Int32" Nullable="false" />
+          <Property Name="stageDescription" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tbl_Contact" Relationship="Self.FK_tbl_Contact_tbl_Stage" FromRole="tbl_Stage" ToRole="tbl_Contact" />
+        </EntityType>
+        <EntityType Name="tbl_Team">
+          <Key>
+            <PropertyRef Name="teamId" />
+          </Key>
+          <Property Name="teamId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="teamDescription" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="leaderId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="teamCampain" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tbl_Account" Relationship="Self.FK_tbl_Account_tbl_Team" FromRole="tbl_Team" ToRole="tbl_Account" />
+          <NavigationProperty Name="tbl_Contact" Relationship="Self.FK_tbl_Contact_tbl_Team" FromRole="tbl_Team" ToRole="tbl_Contact" />
+        </EntityType>
+        <Association Name="FK_tbl_Account_tbl_Team">
+          <End Role="tbl_Team" Type="Self.tbl_Team" Multiplicity="0..1" />
+          <End Role="tbl_Account" Type="Self.tbl_Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Team">
+              <PropertyRef Name="teamId" />
+            </Principal>
+            <Dependent Role="tbl_Account">
+              <PropertyRef Name="teamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Contact_tbl_Campain">
+          <End Role="tbl_Campain" Type="Self.tbl_Campain" Multiplicity="0..1" />
+          <End Role="tbl_Contact" Type="Self.tbl_Contact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Campain">
+              <PropertyRef Name="campainId" />
+            </Principal>
+            <Dependent Role="tbl_Contact">
+              <PropertyRef Name="campainID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Contact_tbl_Customer">
+          <End Role="tbl_Customer" Type="Self.tbl_Customer" Multiplicity="0..1" />
+          <End Role="tbl_Contact" Type="Self.tbl_Contact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Customer">
+              <PropertyRef Name="CusId" />
+            </Principal>
+            <Dependent Role="tbl_Contact">
+              <PropertyRef Name="cusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Contact_tbl_Product">
+          <End Role="tbl_Product" Type="Self.tbl_Product" Multiplicity="0..1" />
+          <End Role="tbl_Contact" Type="Self.tbl_Contact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Product">
+              <PropertyRef Name="productID" />
+            </Principal>
+            <Dependent Role="tbl_Contact">
+              <PropertyRef Name="proID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Contact_tbl_Stage">
+          <End Role="tbl_Stage" Type="Self.tbl_Stage" Multiplicity="0..1" />
+          <End Role="tbl_Contact" Type="Self.tbl_Contact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Stage">
+              <PropertyRef Name="stageId" />
+            </Principal>
+            <Dependent Role="tbl_Contact">
+              <PropertyRef Name="stageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Contact_tbl_Team">
+          <End Role="tbl_Team" Type="Self.tbl_Team" Multiplicity="0..1" />
+          <End Role="tbl_Contact" Type="Self.tbl_Contact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Team">
+              <PropertyRef Name="teamId" />
+            </Principal>
+            <Dependent Role="tbl_Contact">
+              <PropertyRef Name="teamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_KPI_tbl_Role">
+          <End Role="tbl_Role" Type="Self.tbl_Role" Multiplicity="0..1" />
+          <End Role="tbl_KPI" Type="Self.tbl_KPI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Role">
+              <PropertyRef Name="roleid" />
+            </Principal>
+            <Dependent Role="tbl_KPI">
+              <PropertyRef Name="roleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="vikingEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tbl_Account" EntityType="Self.tbl_Account" />
+          <EntitySet Name="tbl_Campain" EntityType="Self.tbl_Campain" />
+          <EntitySet Name="tbl_Contact" EntityType="Self.tbl_Contact" />
+          <EntitySet Name="tbl_Customer" EntityType="Self.tbl_Customer" />
+          <EntitySet Name="tbl_KPI" EntityType="Self.tbl_KPI" />
+          <EntitySet Name="tbl_Product" EntityType="Self.tbl_Product" />
+          <EntitySet Name="tbl_Role" EntityType="Self.tbl_Role" />
+          <EntitySet Name="tbl_Stage" EntityType="Self.tbl_Stage" />
+          <EntitySet Name="tbl_Team" EntityType="Self.tbl_Team" />
+          <AssociationSet Name="FK_tbl_Account_tbl_Team" Association="Self.FK_tbl_Account_tbl_Team">
+            <End Role="tbl_Team" EntitySet="tbl_Team" />
+            <End Role="tbl_Account" EntitySet="tbl_Account" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Contact_tbl_Campain" Association="Self.FK_tbl_Contact_tbl_Campain">
+            <End Role="tbl_Campain" EntitySet="tbl_Campain" />
+            <End Role="tbl_Contact" EntitySet="tbl_Contact" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Contact_tbl_Customer" Association="Self.FK_tbl_Contact_tbl_Customer">
+            <End Role="tbl_Customer" EntitySet="tbl_Customer" />
+            <End Role="tbl_Contact" EntitySet="tbl_Contact" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Contact_tbl_Product" Association="Self.FK_tbl_Contact_tbl_Product">
+            <End Role="tbl_Product" EntitySet="tbl_Product" />
+            <End Role="tbl_Contact" EntitySet="tbl_Contact" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Contact_tbl_Stage" Association="Self.FK_tbl_Contact_tbl_Stage">
+            <End Role="tbl_Stage" EntitySet="tbl_Stage" />
+            <End Role="tbl_Contact" EntitySet="tbl_Contact" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Contact_tbl_Team" Association="Self.FK_tbl_Contact_tbl_Team">
+            <End Role="tbl_Team" EntitySet="tbl_Team" />
+            <End Role="tbl_Contact" EntitySet="tbl_Contact" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_KPI_tbl_Role" Association="Self.FK_tbl_KPI_tbl_Role">
+            <End Role="tbl_Role" EntitySet="tbl_Role" />
+            <End Role="tbl_KPI" EntitySet="tbl_KPI" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="vikingModelStoreContainer" CdmEntityContainer="vikingEntities">
+          <EntitySetMapping Name="tbl_Account">
+            <EntityTypeMapping TypeName="vikingModel.tbl_Account">
+              <MappingFragment StoreEntitySet="tbl_Account">
+                <ScalarProperty Name="accountId" ColumnName="accountId" />
+                <ScalarProperty Name="teamID" ColumnName="teamID" />
+                <ScalarProperty Name="accountPass" ColumnName="accountPass" />
+                <ScalarProperty Name="accountName" ColumnName="accountName" />
+                <ScalarProperty Name="aPhone" ColumnName="aPhone" />
+                <ScalarProperty Name="aFBurl" ColumnName="aFBurl" />
+                <ScalarProperty Name="aAddress" ColumnName="aAddress" />
+                <ScalarProperty Name="aCMND" ColumnName="aCMND" />
+                <ScalarProperty Name="aRoleId" ColumnName="aRoleId" />
+                <ScalarProperty Name="aEmail" ColumnName="aEmail" />
+                <ScalarProperty Name="aIsMale" ColumnName="aIsMale" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Campain">
+            <EntityTypeMapping TypeName="vikingModel.tbl_Campain">
+              <MappingFragment StoreEntitySet="tbl_Campain">
+                <ScalarProperty Name="campainId" ColumnName="campainId" />
+                <ScalarProperty Name="campainCode" ColumnName="campainCode" />
+                <ScalarProperty Name="campDes" ColumnName="campDes" />
+                <ScalarProperty Name="dateStart" ColumnName="dateStart" />
+                <ScalarProperty Name="dateEnd" ColumnName="dateEnd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Contact">
+            <EntityTypeMapping TypeName="vikingModel.tbl_Contact">
+              <MappingFragment StoreEntitySet="tbl_Contact">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="dateStart" ColumnName="dateStart" />
+                <ScalarProperty Name="dateEnd" ColumnName="dateEnd" />
+                <ScalarProperty Name="lastUpdate" ColumnName="lastUpdate" />
+                <ScalarProperty Name="note" ColumnName="note" />
+                <ScalarProperty Name="cusID" ColumnName="cusID" />
+                <ScalarProperty Name="curAdminId" ColumnName="curAdminId" />
+                <ScalarProperty Name="teamID" ColumnName="teamID" />
+                <ScalarProperty Name="proID" ColumnName="proID" />
+                <ScalarProperty Name="loanAmounth" ColumnName="loanAmounth" />
+                <ScalarProperty Name="stageID" ColumnName="stageID" />
+                <ScalarProperty Name="history" ColumnName="history" />
+                <ScalarProperty Name="referenceSource" ColumnName="referenceSource" />
+                <ScalarProperty Name="campainID" ColumnName="campainID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Customer">
+            <EntityTypeMapping TypeName="vikingModel.tbl_Customer">
+              <MappingFragment StoreEntitySet="tbl_Customer">
+                <ScalarProperty Name="CusId" ColumnName="CusId" />
+                <ScalarProperty Name="CusCMND" ColumnName="CusCMND" />
+                <ScalarProperty Name="CusName" ColumnName="CusName" />
+                <ScalarProperty Name="CusPhone" ColumnName="CusPhone" />
+                <ScalarProperty Name="CusAddress" ColumnName="CusAddress" />
+                <ScalarProperty Name="CusCompany" ColumnName="CusCompany" />
+                <ScalarProperty Name="CusPosition" ColumnName="CusPosition" />
+                <ScalarProperty Name="CusSalary" ColumnName="CusSalary" />
+                <ScalarProperty Name="CusNote" ColumnName="CusNote" />
+                <ScalarProperty Name="CusEmail" ColumnName="CusEmail" />
+                <ScalarProperty Name="CusSexIsMale" ColumnName="CusSexIsMale" />
+                <ScalarProperty Name="CusDateOfBirth" ColumnName="CusDateOfBirth" />
+                <ScalarProperty Name="CusCICNumber" ColumnName="CusCICNumber" />
+                <ScalarProperty Name="CusLimitOffer" ColumnName="CusLimitOffer" />
+                <ScalarProperty Name="CusDistrict" ColumnName="CusDistrict" />
+                <ScalarProperty Name="CusCity" ColumnName="CusCity" />
+                <ScalarProperty Name="CusLeadProDuct" ColumnName="CusLeadProDuct" />
+                <ScalarProperty Name="CusVPID" ColumnName="CusVPID" />
+                <ScalarProperty Name="Branches" ColumnName="Branches" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_KPI">
+            <EntityTypeMapping TypeName="vikingModel.tbl_KPI">
+              <MappingFragment StoreEntitySet="tbl_KPI">
+                <ScalarProperty Name="kpiID" ColumnName="kpiID" />
+                <ScalarProperty Name="roleID" ColumnName="roleID" />
+                <ScalarProperty Name="kpiNumber" ColumnName="kpiNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Product">
+            <EntityTypeMapping TypeName="vikingModel.tbl_Product">
+              <MappingFragment StoreEntitySet="tbl_Product">
+                <ScalarProperty Name="productID" ColumnName="productID" />
+                <ScalarProperty Name="proDescription" ColumnName="proDescription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Role">
+            <EntityTypeMapping TypeName="vikingModel.tbl_Role">
+              <MappingFragment StoreEntitySet="tbl_Role">
+                <ScalarProperty Name="roleid" ColumnName="roleid" />
+                <ScalarProperty Name="roleDescription" ColumnName="roleDescription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Stage">
+            <EntityTypeMapping TypeName="vikingModel.tbl_Stage">
+              <MappingFragment StoreEntitySet="tbl_Stage">
+                <ScalarProperty Name="stageId" ColumnName="stageId" />
+                <ScalarProperty Name="stageDescription" ColumnName="stageDescription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Team">
+            <EntityTypeMapping TypeName="vikingModel.tbl_Team">
+              <MappingFragment StoreEntitySet="tbl_Team">
+                <ScalarProperty Name="teamId" ColumnName="teamId" />
+                <ScalarProperty Name="teamDescription" ColumnName="teamDescription" />
+                <ScalarProperty Name="leaderId" ColumnName="leaderId" />
+                <ScalarProperty Name="teamCampain" ColumnName="teamCampain" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
