@@ -8,7 +8,7 @@ namespace Viking.Data.Models.Entities.Repositories
 {
     interface IAccountRepository
     {
-        //
+
     }
     class AccountRepository : BaseRepository<tbl_Account>, IAccountRepository
     {
