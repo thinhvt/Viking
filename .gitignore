@@ -14,3 +14,8 @@ Viking.Api/Viking.Data/obj/Debug/Viking.Data.csproj.FileListAbsolute.txt
 Viking.Api/Viking.Data/obj/Debug/Viking.Data.csprojResolveAssemblyReference.cache
 Viking.Api/Viking.Data/obj/Debug/Viking.Data.dll
 Viking.Api/Viking.Data/obj/Debug/Viking.Data.pdb
+Viking.Api/Viking.Api/bin
+Viking.Api/Viking.Api/obj
+Viking.Api/Viking.Data/bin
+Viking.Api/Viking.Data/obj
+Viking.Api/.vs
