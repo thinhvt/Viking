@@ -1,2 +1,16 @@
 Viking.Api/.vs/Viking.Api/v14/.suo
 Viking.Api/Viking.Api/Viking.Api.csproj.user
+Viking.Api/Viking.Api/bin/Viking.Api.dll
+Viking.Api/Viking.Api/bin/Viking.Api.pdb
+Viking.Api/Viking.Api/bin/Viking.Data.dll
+Viking.Api/Viking.Api/bin/Viking.Data.pdb
+Viking.Api/Viking.Api/obj/Debug/Viking.Api.csproj.FileListAbsolute.txt
+Viking.Api/Viking.Api/obj/Debug/Viking.Api.csprojResolveAssemblyReference.cache
+Viking.Api/Viking.Api/obj/Debug/Viking.Api.dll
+Viking.Api/Viking.Api/obj/Debug/Viking.Api.pdb
+Viking.Api/Viking.Data/bin/Debug/Viking.Data.dll
+Viking.Api/Viking.Data/bin/Debug/Viking.Data.pdb
+Viking.Api/Viking.Data/obj/Debug/Viking.Data.csproj.FileListAbsolute.txt
+Viking.Api/Viking.Data/obj/Debug/Viking.Data.csprojResolveAssemblyReference.cache
+Viking.Api/Viking.Data/obj/Debug/Viking.Data.dll
+Viking.Api/Viking.Data/obj/Debug/Viking.Data.pdb
