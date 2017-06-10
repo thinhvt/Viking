@@ -1,0 +1,476 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<button type="button" id="btnCreate" class="btn btn-primary" data-toggle="modal" data-target="#lectureModal">
+    Create New
+</button>
+<p></p>
+<table id="dataTableDemo" class="table table-striped table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>No.</th>
+            <th>Subject Code</th>
+            <th>Subject Name</th>
+            <th>Credit</th>
+            <th>TotalSlots</th>
+            <th>Department Name</th>
+            <th>Action</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+<div id="lectureModal" class="modal fade">
+
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" id="btnClose" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Create Subject<label id="title"></label></h4>
+            </div>
+
+            <div class="modal-body">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <div class="col-md-10">
+                            <label>SubCode</label>
+
+                            <input type="text" id="SubCode" class="form-control" />
+
+                            <label id="SubError" style="color:red; visibility:hidden;"> SubCode should include numbers or letters (2-10 characters)</label><br />
+                            <label id="SubEError" style="color:red; visibility:hidden;"> SubCode aldready exsists</label>
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-10">
+                            <label>SubName</label>
+                            <input type="text" id="SubName" class="form-control" />
+                            <label id="SubNameError" style="color:red; visibility:hidden;"> SubName should include numbers or letters (2-100 characters)</label>
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-10">
+                            <label>Credit</label>
+                            <input type="text" id="Credit" class="form-control" />
+                            <label id="SubCreditError" style="color:red; visibility:hidden;"> Credit should be a number (0-3 digits)</label>
+
+                        </div>
+
+                    </div><div class="form-group">
+                        <div class="col-md-10">
+                            <label>TotalSlots</label>
+                            <input type="text" id="TotalSlots" class="form-control" />
+                            <label id="SubTotalError" style="color:red; visibility:hidden;"> TotalSlots should be a number (30-69 digits)</label>
+
+                        </div>
+                    </div>
+                    <select id="cateDepartment">
+                        @{
+                            UniversityManagement.Service.DepartmentService deSer = new UniversityManagement.Service.DepartmentService();
+                            var list = deSer.getAll();
+                        }
+                        @foreach (var p in list)
+                        {
+                            <option value="@p.ID">@p.DepName</option>
+                        }
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" id="btnSave" class="btn btn-primary">Save</button>
+                    <button type="button" id="btnClose1" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="confirmModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"><label id="LecturerName"></label></h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal">
+                    Do you want to delete this record ?
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnOk" class="btn btn-primary">Ok</button>
+                <button type="button" id="btnCancel" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    var CreateCheck = true;
+    var No = 1;
+
+    function getLecturerData() {
+        var DataTable1 = $("#dataTableDemo");
+        $(DataTable1).dataTable({
+            "bFilter": true,
+            "bSort": true,
+            "bRetrieve": true,
+            // "bServerSide": true,
+            "bScrollCollapse": true,
+            "bProcessing": true,
+            "XScroll": true,
+            "sAjaxSource": "@Url.Action("GetDataTable", "Subject")",
+
+            "aoColumns": [
+                  {
+                      "sName": "No.",
+                      "bSearchable": false,
+                      "bSortable": false,
+                      "mRender": function () {
+                          return No++;
+                      }
+                  },
+                //{
+                //    "sName": "ID",
+                //    "bSearchable": false,
+                //    "bSortable": false
+                //},
+                {
+                    "sName": "SubCode",
+                    "bSearchable": true,
+                    "bSortable": true
+                }, {
+                    "sName": "SubName",
+                    "bSearchable": true,
+                    "bSortable": true
+                }, {
+                    "sName": "Credit",
+                    "bSearchable": true,
+                    "bSortable": true
+                },
+                  {
+                      "sName": "TotalSlots",
+                      "bSearchable": true,
+                      "bSortable": true
+                  },
+                   {
+                       "sName": "DepName",
+                       "bSearchable": true,
+                       "bSortable": true
+                   },
+
+
+                  {
+                      "bSortable": false,
+                      "bSearchable": false,
+                      "mRender": function (data, type, full) {
+                          return "<a class=\"btn btn-block btn-primary\" href=\"javascript:ManageUser('" + full[0] + "');\">Manage</a>";
+                      }
+                  },
+
+                  {
+                      "bSortable": false,
+                      "bSearchable": false,
+                      "mRender": function (data, type, full) {
+                          return "<a class=\"btn btn-block btn-danger\" href=\"javascript:DeleteUser('" + full[0] + "','" + full[1] + "');\">Delete</a>";
+                      }
+                  }
+
+            ],
+            "bAutoWidth": false
+        });
+    }
+    $(document).ready(function () {
+        getLecturerData();
+
+    });
+
+
+    var checkExsist = true;
+    //valid SubCode
+    var checkValid = true;
+    $("#SubCode").blur(function () {
+        checkExsist = true;
+        var regEx = /^[a-zA-Z0-9]{2,10}$/;
+        if (($("#SubCode").val()).match(regEx) == null) {
+            document.getElementById('SubError').style.visibility = "visible";
+            checkValid = false;
+            checkRong = true;
+        } else {
+            document.getElementById('SubError').style.visibility = "hidden";
+            checkValid = true;
+        }
+
+        ExistCode($("#SubCode").val())
+        document.getElementById('SubEError').style.visibility = "hidden";
+
+
+    })
+
+    //valid SubName
+    $("#SubName").blur(function () {
+        var regEx = /^[a-zA-Z0-9 ]{2,100}$/;
+        if (($("#SubName").val()).match(regEx) == null) {
+            document.getElementById('SubNameError').style.visibility = "visible";
+            checkValid = false;
+            checkRong = true;
+        } else {
+            document.getElementById('SubNameError').style.visibility = "hidden";
+            checkValid = true;
+        }
+    })
+
+
+    //valid Credit
+    $("#Credit").blur(function () {
+        var regEx = /^[0-3]{1}$/;
+        if (($("#Credit").val()).match(regEx) == null) {
+            document.getElementById('SubCreditError').style.visibility = "visible";
+            checkValid = false;
+            checkRong = true;
+        } else {
+            document.getElementById('SubCreditError').style.visibility = "hidden";
+            checkValid = true;
+        }
+    })
+
+    //valid Total
+    $("#TotalSlots").blur(function () {
+        var regEx = /^[3-6][0-9]$/;
+        if (($("#TotalSlots").val()).match(regEx) == null) {
+            document.getElementById('SubTotalError').style.visibility = "visible";
+            checkValid = false;
+            checkRong = true;
+        } else {
+            document.getElementById('SubTotalError').style.visibility = "hidden";
+            checkValid = true;
+        }
+    })
+    //valid ROng
+    var checkRong = true;
+    function checkBlank() {
+
+        checkRong = true;
+        if ($("#SubCode").val() == "") {
+            document.getElementById('SubError').style.visibility = "visible";
+            checkRong = false;
+        }
+        if ($("#SubName").val() == "") {
+            document.getElementById('SubNameError').style.visibility = "visible";
+            checkRong = false;
+        }
+        if ($("#TotalSlots").val() == "") {
+            document.getElementById('SubTotalError').style.visibility = "visible";
+            checkRong = false;
+        }
+        if ($("#Credit").val() == "") {
+            document.getElementById('SubCreditError').style.visibility = "visible";
+            checkRong = false;
+        }
+        return checkRong;
+    }
+
+    function ExistCode(Code) {
+        checkExsist = true;
+
+        $.ajax({
+
+            url: '/Subject/CheckExsist/',
+            data: { code: Code },
+            type: 'GET',
+            dataType: 'json',
+            //data: Code,
+            success: function (data) {
+                checkExsist = data.success;
+
+            },
+            error: function (err) {
+                alert("Error: " + err.responseText);
+                checkExsist = false;
+            }
+        })
+
+    }
+
+
+    $('#btnSave').click(function () {
+        checkBlank();
+        if (checkExsist == false) {
+
+            document.getElementById('SubEError').style.visibility = "visible";
+            checkExsist = false;
+            
+        }
+        else {
+            document.getElementById('SubEError').style.visibility = "hidden";
+            checkExsist = true;
+        }
+        if (checkValid == true && checkRong == true && checkExsist == true) {
+
+            if (CreateCheck == true) {
+                var data = {
+                    SubCode: $("#SubCode").val(),
+                    SubName: $("#SubName").val(),
+                    Credit: $("#Credit").val(),
+                    TotalSlots: $("#TotalSlots").val(),
+                    DepartmentID: $('#cateDepartment option:selected').val()
+
+                }
+                clear()
+                alert("Successed");
+                $.ajax({
+                    url: '/Subject/Create/',
+                    type: 'POST',
+                    dataType: 'json',
+                    CreateCheck: true,
+                    data: data,
+                    success: function (data) {
+                        $("#lectureModal").modal('hide');
+                        clear();
+                        getLecturerData();
+                        $('#dataTableDemo').DataTable().ajax.reload()
+
+                    },
+                    error: function (err) {
+                        alert("Error: " + err.responseText);
+                    }
+                })
+            } else {
+                var data = {
+                    ID: LecturerID,
+                    SubCode: $("#SubCode").val(),
+                    SubName: $("#SubName").val(),
+                    Credit: $("#Credit").val(),
+                    TotalSlots: $("#TotalSlots").val(),
+                    DepartmentID: $('#cateDepartment option:selected').val()
+
+                }
+                clear()
+                $.ajax({
+
+                    url: '/Subject/Update/',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: data,
+                    success: function (data) {
+                        $("#lectureModal").modal('hide');
+                        clear();
+                        getLecturerData();
+
+                        $('#dataTableDemo').DataTable().ajax.reload()
+
+                    },
+                    error: function (err) {
+                        alert("Error: " + err.responseText);
+                    }
+                })
+
+            }
+
+
+        }
+
+    });
+    var LecturerID;
+    function ManageUser(ID) {
+
+        $.ajax({
+            url: '/Subject/GetLecturerByID/' + ID,
+            type: 'GET',
+            dataType: 'json',
+            //  data: data,
+            success: function (data) {
+                //  alert(data.ID);
+                LecturerID = data.ID
+                $("#SubCode").val(data.SubCode);
+                $("#SubName").val(data.SubName);
+                $("#Credit").val(data.Credit);
+                $("#TotalSlots").val(data.TotalSlots);
+                CreateCheck = false;
+                $("#lectureModal").modal('show');
+                $('#cateDepartment').val(data.DepartmentID).change()
+            },
+            error: function (err) {
+                alert("Error: " + err.responseText);
+            }
+        });
+
+        //    alert(ID);
+    }
+
+
+    var IDsu = 0;
+    function DeleteUser(ID, LecturerN) {
+        $("#confirmModal").modal('show');
+        $("#LecturerName").text(LecturerN);
+        IDsu = ID;
+    }
+
+    $("#confirmModal #btnOk").click(function (e) {
+
+        $.ajax({
+            url: '/Subject/Delete/' + IDsu,
+            type: "POST",
+            dataType: 'json',
+            success: function (IDsu) {
+                getLecturerData();
+                $("#confirmModal").modal('hide');
+                $('#dataTableDemo').DataTable().ajax.reload()
+
+            },
+            error: function (e) {
+                alert("Error: " + e.responseText);
+
+            }
+
+        });
+        clear();
+        e.preventDefault();
+    });
+
+    $("#btnClose").click(function () {
+        clear();
+        CreateCheck = true;
+
+    });
+    $("#btnClose1").click(function (e) {
+        clear();
+        CreateCheck = true;
+        
+    })
+
+    $("#btnCreate").click(function (e) {
+        clear();
+        CreateCheck = true;
+    })
+    function clear() {
+        $("#SubCode").val("");
+        $("#SubName").val("");
+        $("#Credit").val("");
+        $("#TotalSlots").val("");
+        $("#select option").index($("#select option:selected"));
+        CreateCheck = true;
+        No = 1;
+        document.getElementById('SubError').style.visibility = "hidden";
+        document.getElementById('SubEError').style.visibility = "hidden";
+        document.getElementById('SubNameError').style.visibility = "hidden";
+        document.getElementById('SubCreditError').style.visibility = "hidden";
+        document.getElementById('SubTotalError').style.visibility = "hidden";
+
+        checkValid = true;
+    }
+
+
+
+
+</script>
